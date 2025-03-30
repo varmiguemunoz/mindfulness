@@ -1,0 +1,14 @@
+
+{
+    "homepage": {
+        "title": "Bienvenido a la página de inicio",
+        "description": "Esta es la página de inicio de la aplicación"
+    },
+
+    "login": {
+        "title": "Login",
+        "username": "Usuario",
+        "password": "Contraseña",
+        "login": "Login"
+    }
+}

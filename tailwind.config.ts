@@ -17,7 +17,13 @@ export default {
         foreground: "hsl(var(--foreground))",
         purpleBase: "#953E6F",
         lightPurple: "#F2CEF0",
+        baseGray: "#3C3C3C",
         lightGray: "#CFCFCF",
+        softSky: "#FFD8B1",
+        lavender: "#D8C3E3",
+        mintGreen: "#B5EAD7",
+        dustyPink: "#F7CAC9",
+        softPeach: "#FFD8B1",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

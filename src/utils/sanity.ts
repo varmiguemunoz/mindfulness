@@ -121,4 +121,73 @@ async function getSliderImages() {
   }
 }
 
-export { getServices, getBlogs, getBlog, getBannerBlogImage, getSliderImages };
+async function getVideos(currentPage: number = 1, itemsPerPage: number = 10) {
+  try {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    const query = groq`
+    *[_type == "video"] | order(publishedAt desc) [${start}...${end}] {
+      "slug": slug.current,
+      title,
+      _id,
+      publishedAt,
+      "alt": thumbnail.alt,
+      "thumbnail": thumbnail.asset->url,
+      description
+    }
+  `;
+
+    const client = createClient(clientConfig);
+    const data = await client.fetch(query, {}, { cache: "no-store" });
+
+    // Obtener el total de videos para la paginación
+    const totalQuery = groq`count(*[_type == "video"])`;
+    const totalItems = await client.fetch(totalQuery);
+
+    return { data, totalItems };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+async function getVideo(slug: string) {
+  try {
+    const query = groq`
+    *[_type == "video" && slug.current == $slug][0] {
+      "slug": slug.current,
+      title,
+      _id,
+      publishedAt,
+      "alt": thumbnail.alt,
+      "thumbnail": thumbnail.asset->url,
+      description,
+      title,
+      body,
+      "video": video.asset->url,
+  }
+    `;
+
+    return await createClient(clientConfig).fetch(
+      query,
+      {
+        slug,
+      },
+      { cache: "no-store" }
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export {
+  getServices,
+  getBlogs,
+  getBlog,
+  getBannerBlogImage,
+  getSliderImages,
+  getVideos,
+  getVideo,
+};

@@ -1,10 +1,10 @@
 export interface Serie {
-  created_at: string;
+  publishedAt: string;
   description: string;
-  id: number;
+  slug: string;
+  _id: string;
   thumbnail: string;
   title: string;
-  type: string;
 }
 
 export interface Chapter {

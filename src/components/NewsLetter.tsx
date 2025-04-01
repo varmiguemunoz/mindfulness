@@ -28,7 +28,7 @@ export default function NewsLetter() {
       <span className="mb-3 text-sm font-semibold text-zinc-400">
         Newsletter
       </span>
-      <p className="mb-4 text-sm text-zinc-500">
+      <p className="mb-4 text-sm text-zinc-500/80">
         Get exclusive content and updates
       </p>
       <form className="flex gap-2" onSubmit={handleSubscribeUser}>
@@ -36,11 +36,11 @@ export default function NewsLetter() {
           type="email"
           placeholder="Enter your email"
           name="email"
-          className="flex-1 rounded-lg bg-zinc-800/50 px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none ring-zinc-700 transition-shadow focus:ring-2"
+          className="flex-1 rounded-lg bg-white px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none ring-zinc-700 transition-shadow focus:ring-1"
         />
         <button
           type="submit"
-          className="rounded-lg bg-[#D982CA] px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200"
+          className="rounded-lg bg-lavender px-4 py-2 text-sm font-bold text-white hover:bg-lavender/80"
         >
           Subscribe
         </button>

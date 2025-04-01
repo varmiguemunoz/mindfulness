@@ -11,7 +11,7 @@ interface BlogCardProps {
 
 function BlogCard({ title, src, alt, date }: BlogCardProps) {
   return (
-    <div className="flex md:flex-row flex-col w-full items-center justify-between md:gap-12 border-b border-gray-300/30 py-5">
+    <div className="flex md:flex-row flex-col w-full items-center justify-between md:gap-12 border-b border-gray-400/30 py-5">
       <Image
         src={src}
         alt={alt}
@@ -22,17 +22,15 @@ function BlogCard({ title, src, alt, date }: BlogCardProps) {
         className={`object-cover rounded-sm md:w-1/2 md:h-[300px] w-full h-[300px]`}
       />
       <div className="flex flex-col justify-start items-start gap-3 md:w-1/2 w-full h-full">
-        <span className="rounded-full px-3 py-1 text-[#2ABDBB] font-medium text-sm bg-gray-100/10">
+        <span className="rounded-full py-1 text-[#2ABDBB] font-medium text-sm bg-gray-100/10">
           Latest News
         </span>
         <div className="flex items-center justify-center gap-3">
           <FormattedDate date={date} type={"post"} />
         </div>
-        <h3 className={`font-bold text-white text-2xl`}>{title}</h3>
+        <h3 className={`font-bold text-black/50 text-2xl`}>{title}</h3>
 
-        <span className="text-[#2ABDBB] font-bold text-sm mt-5">
-          Miguel Munoz
-        </span>
+        <span className="text-[#2ABDBB] font-bold text-sm mt-5">Read More</span>
       </div>
     </div>
   );

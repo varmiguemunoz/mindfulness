@@ -7,19 +7,19 @@ import Link from "next/link";
 interface VideosContentProps {
   title: string;
   image: string;
-  id: number;
+  description: string;
+  id: string;
 }
 
 export default function VideosContent({
   title,
   image,
   id,
+  description,
 }: VideosContentProps) {
-  // Componente desde el que se renderizan las tarjetas de las series
-
   return (
     <Link href={`/dashboard/videos/${id}`} className="w-full h-full">
-      <VideoCard image={image} title={title} />
+      <VideoCard image={image} title={title} description={description} />
     </Link>
   );
 }

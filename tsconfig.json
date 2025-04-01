@@ -23,6 +23,15 @@
       "@sanity": ["./sanity.config.ts"]
     }
   },
-  "include": ["../next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../next.config.ts", "../sanity.cli.ts", "../sanity.config.ts", "../tailwind.config.ts"],
+  "include": [
+    "../next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../next.config.ts",
+    "../sanity.cli.ts",
+    "../sanity.config.ts",
+    "../tailwind.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

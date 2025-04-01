@@ -56,10 +56,10 @@ export default function LoginForm() {
         ogImageUrl="https://www.hentifyhub.com/header.png"
         twitterHandle="yourtwitterhandle"
       />
-      <div className="space-y-6 bg-[#313131] rounded-sm px-10 py-10">
+      <div className="space-y-6 bg-lavender rounded-sm px-10 py-10">
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-white">
+            <Label htmlFor="email" className="text-white font-bold">
               Email
             </Label>
             <Input
@@ -73,7 +73,7 @@ export default function LoginForm() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-white">
+            <Label htmlFor="password" className="text-white font-bold">
               Password
             </Label>
             <Input
@@ -88,7 +88,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-[#A65B99] hover:bg-[#D982CA]"
+            className="w-full bg-mintGreen text-white font-bold hover:bg-[#3C3C3C]"
           >
             Login
           </Button>
@@ -97,7 +97,7 @@ export default function LoginForm() {
           <Button
             onClick={handleGoogleSignIn}
             variant="outline"
-            className="w-full bg-orange-100 border-orange-200 hover:bg-orange-200"
+            className="w-full text-white font-bold bg-softSky border-orange-200 hover:bg-softSky/80 hover:text-white"
           >
             <FaGooglePlusG className="text-orange-700 w-[35px]" size={35} />
             Sign in with Google
@@ -105,11 +105,11 @@ export default function LoginForm() {
         </div>
         <p className="text-center text-sm text-white">
           Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-blue-500 hover:underline">
+          <Link href="/register" className="text-white font-bold underline">
             Register
           </Link>{" "}
           Or{" "}
-          <Link href="/recovery" className="text-blue-500 hover:underline">
+          <Link href="/recovery" className="text-white font-bold underline">
             Recover
           </Link>
         </p>

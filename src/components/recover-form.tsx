@@ -31,10 +31,10 @@ export default function RecoverForm() {
   };
 
   return (
-    <div className="space-y-6 bg-[#313131] rounded-sm px-10 py-10">
+    <div className="space-y-6 bg-lavender rounded-sm px-10 py-10">
       <form onSubmit={handleRecover} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-white">
+          <Label htmlFor="email" className="text-white font-bold">
             Email
           </Label>
           <Input
@@ -50,14 +50,14 @@ export default function RecoverForm() {
 
         <Button
           type="submit"
-          className="w-full bg-[#A65B99] hover:bg-[#D982CA]"
+          className="w-full bg-mintGreen hover:bg-[#3C3C3C] text-white/90 transition"
         >
           Recover
         </Button>
       </form>
       <p className="text-center text-sm text-white">
         Already have an account?{" "}
-        <Link href="/login" className="text-blue-500 hover:underline">
+        <Link href="/login" className="text-white font-bold underline">
           Login
         </Link>
       </p>

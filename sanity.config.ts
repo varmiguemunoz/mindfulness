@@ -7,7 +7,7 @@ import { schema } from "./sanity/schema";
 export default defineConfig({
   name: "civil-registry",
   title: "Civil Registry",
-  basePath: "/es/studio",
+  basePath: "/studio",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   cdn: true,

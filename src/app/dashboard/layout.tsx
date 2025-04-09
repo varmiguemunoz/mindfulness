@@ -74,7 +74,10 @@ export default async function Layout({
 
   const data = await getSuscriptionStatus();
 
-  const subscriptionActive = data && data === ("active" as any) ? true : false;
+  console.log(data);
+
+  const subscriptionActive =
+    data && data.status === ("active" as string) ? true : false;
 
   if (!user) {
     redirect("/login");

@@ -1,34 +1,47 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+
+import { getVideosToCategories } from "@/utils/sanity";
+import { Serie } from "@/types/api";
 
 import VideosContent from "@/components/videos-content";
-import { Serie } from "@/types/api";
-import { getVideos } from "@/utils/sanity";
+import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
+import { toast } from "sonner";
 
-export default function Videos() {
+export default function Categories() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
 
+  const searchParams = useSearchParams();
+  const category = searchParams.get("value");
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const { data, totalItems } = await getVideos(currentPage, itemsPerPage);
+        const { data, totalItems } = await getVideosToCategories(
+          currentPage,
+          itemsPerPage,
+          category || ""
+        );
         setData(data);
         setLoading(false);
         setTotalItems(totalItems);
       } catch (err) {
+        toast.error("Error fetching categories data");
         setLoading(false);
-        console.log(err);
+        throw err;
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, category]);
 
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected + 1);
@@ -36,7 +49,7 @@ export default function Videos() {
 
   return (
     <div className="w-full max-w-[1114px] mx-auto py-[120px] space-y-10">
-      <h1 className="text-black/80 font-bold text-4xl">Latest Additions</h1>
+      <h1 className="text-black/80 font-bold text-4xl">{category}</h1>
       {data.length && (
         <>
           <div className="gap-16 grid grid-cols-3 max-sm:w-[90%] mx-auto max-sm:grid-cols-1 content-center">

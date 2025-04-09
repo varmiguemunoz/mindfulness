@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 // import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaHome } from "react-icons/fa";
+import Dropdown from "@/components/Dropdown";
 
 export default function Navbar({ session, signOut, showSearch }: any) {
   const pathname = usePathname();
@@ -34,17 +35,22 @@ export default function Navbar({ session, signOut, showSearch }: any) {
           </Link>
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="items-center gap-2 md:flex">
           {session ? (
             <div className="flex items-center gap-5">
               {showSearch && (
-                <Link href={isSearch ? "/dashboard" : "/dashboard/search"}>
-                  {isSearch ? (
-                    <FaHome size={30} color="white" />
-                  ) : (
-                    <CiSearch size={30} className="" color="white" />
-                  )}
-                </Link>
+                <>
+                  <Link href={isSearch ? "/dashboard" : "/dashboard/search"}>
+                    {isSearch ? (
+                      <FaHome size={30} color="black" />
+                    ) : (
+                      <CiSearch size={30} className="block" color="black" />
+                    )}
+                  </Link>
+
+                  {/* <Dropdown /> */}
+                  <Dropdown />
+                </>
               )}
 
               <Button

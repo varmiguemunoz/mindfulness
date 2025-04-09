@@ -40,6 +40,8 @@ export default function Videos() {
     fetchData();
   }, [slug]);
 
+  console.log(videos);
+
   return (
     <div className="w-full mt-[118px] mx-auto pb-[100px]">
       {/* Reproductor de video */}

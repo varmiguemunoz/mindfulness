@@ -166,6 +166,10 @@ async function getVideo(slug: string) {
       title,
       body,
       "video": video.asset->url,
+      "typecontent": typecontent-> {
+          _id,
+          name
+      }
   }
     `;
 
@@ -182,8 +186,66 @@ async function getVideo(slug: string) {
   }
 }
 
+async function getTypesContent() {
+  try {
+    const query = groq`
+    *[_type == "typecontent"] | order(_createdAt desc){
+      name
+  }
+    `;
+
+    return await createClient(clientConfig).fetch(
+      query,
+      {},
+      { cache: "no-store" }
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+async function getVideosToCategories(
+  currentPage: number = 1,
+  itemsPerPage: number = 10,
+  category: string
+) {
+  try {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    const query = groq`
+    *[_type == "video" && typecontent->name == $category] | order(publishedAt desc) [${start}...${end}] {
+      "slug": slug.current,
+      title,
+      _id,
+      publishedAt,
+      "alt": thumbnail.alt,
+      "thumbnail": thumbnail.asset->url,
+      description
+    }
+  `;
+
+    // Obtener el total de videos para la paginación
+    const totalQuery = groq`count(*[_type == "video" &&
+    typecontent->name == $category])`;
+
+    const client = createClient(clientConfig);
+    const data = await client.fetch(query, { category }, { cache: "no-store" });
+
+    const totalItems = await client.fetch(totalQuery, { category });
+
+    return { data, totalItems };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export {
   getServices,
+  getTypesContent,
+  getVideosToCategories,
   getBlogs,
   getBlog,
   getBannerBlogImage,

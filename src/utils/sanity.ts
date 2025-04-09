@@ -242,8 +242,46 @@ async function getVideosToCategories(
   }
 }
 
+const getSearchVideos = async (
+  searchTerm: string,
+  currentPage: number = 1,
+  itemsPerPage: number = 20
+) => {
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
+  try {
+    const client = createClient(clientConfig);
+
+    const query = groq`
+      *[_type == "video" && title match "${searchTerm}*"] | order(publishedAt desc) [${start}...${end}] {
+        "slug": slug.current,
+        title,
+        _id,
+        publishedAt,
+        "alt": thumbnail.alt,
+        "thumbnail": thumbnail.asset->url,
+        description
+      }
+    `;
+
+    const data = await client.fetch(query, {}, { cache: "no-store" });
+
+    const totalQuery = groq`
+      count(*[_type == "video" && title match "${searchTerm}*"])
+    `;
+    const totalItems = await client.fetch(totalQuery);
+
+    return { data, totalItems };
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error");
+  }
+};
+
 export {
   getServices,
+  getSearchVideos,
   getTypesContent,
   getVideosToCategories,
   getBlogs,

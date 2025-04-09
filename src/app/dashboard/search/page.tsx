@@ -6,7 +6,8 @@ import Empty from "@/components/ui/empty";
 import VideosContent from "@/components/videos-content";
 
 import { Serie } from "@/types/api";
-import { getSearchData } from "@/utils/api";
+import Spinner from "@/components/ui/Spinner";
+import { getSearchVideos } from "@/utils/sanity";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,7 +31,7 @@ export default function Search() {
       if (term.length > 2) {
         setLoading(true);
         try {
-          const { data, totalItems } = await getSearchData(
+          const { data, totalItems } = await getSearchVideos(
             searchTerm,
             currentPage,
             itemsPerPage
@@ -56,21 +57,15 @@ export default function Search() {
   return (
     <div className="w-full mt-[118px] max-w-[1214px] mx-auto pb-[100px] max-sm:w-[90%]">
       <div className="flex flex-col gap-8 mb-10">
-        <h1 className="text-lightGray font-bold text-4xl capitalize">
-          Browser
-        </h1>
+        <h1 className="text-black/60 font-bold text-4xl capitalize">Browser</h1>
 
         <input
-          placeholder="Search... "
-          className="border-0 w-full text-white text-md bg-transparent border-b py-2 px-3 shadow-md outline-none focus:ring-0"
+          placeholder="Search Here... "
+          className="border-0 w-full text-black text-md bg-transparent border-blue-500/50 border-b py-2 px-3 shadow-sm outline-none focus:ring-0"
           onChange={handleSearch}
         />
       </div>
-      {loading && (
-        <span className="text-white font-bold text-2xl text-center my-20 block ">
-          Loading....
-        </span>
-      )}
+      {loading && <Spinner />}
       {searchResults.length > 0 && searchTerm.length > 2 && (
         <>
           <div className="gap-16 grid grid-cols-3 max-sm:w-[90%] mx-auto max-sm:grid-cols-1">

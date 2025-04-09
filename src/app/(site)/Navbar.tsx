@@ -42,7 +42,7 @@ export default function Navbar({ session, signOut, showSearch }: any) {
                 <>
                   <Link href={isSearch ? "/dashboard" : "/dashboard/search"}>
                     {isSearch ? (
-                      <FaHome size={30} color="black" />
+                      <FaHome size={23} color="black" />
                     ) : (
                       <CiSearch size={30} className="block" color="black" />
                     )}
